@@ -22,7 +22,6 @@ $body = @{
   }
   enforce_admins = $true
   required_pull_request_reviews = @{
-    dismissal_restrictions = @{}
     dismiss_stale_reviews = $true
     require_code_owner_reviews = $false
     required_approving_review_count = 1
@@ -38,6 +37,6 @@ $body = @{
   allow_fork_syncing = $true
 }
 
-Write-Host "Applying branch protection to $Owner/$Repo:$Branch ..." -ForegroundColor Yellow
+Write-Host ("Applying branch protection to {0}/{1}:{2} ..." -f $Owner, $Repo, $Branch) -ForegroundColor Yellow
 Invoke-RestMethod -Method Put -Uri $uri -Headers $headers -Body ($body | ConvertTo-Json -Depth 10) -ContentType 'application/json' | Out-Null
 Write-Host 'Branch protection applied.' -ForegroundColor Green
