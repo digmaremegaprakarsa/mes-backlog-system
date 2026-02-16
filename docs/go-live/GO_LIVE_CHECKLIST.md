@@ -1,4 +1,4 @@
-﻿# Go-Live Checklist (Execution)
+# Go-Live Checklist (Execution)
 
 Tanggal evaluasi: 2026-02-16
 
@@ -9,17 +9,10 @@ Tanggal evaluasi: 2026-02-16
   - Next upgraded ke `15.5.10`
 
 ## 2. Build/deploy validation
-- Status: IN PROGRESS (CI GATE ENABLED)
+- Status: CLOSED
 - Evidence:
-  - Typecheck lulus: `npx tsc -p apps/web/tsconfig.json --noEmit`
-  - Workflow gate dibuat: `.github/workflows/ci-gate.yml` (Node 20, audit+typecheck+build)
-  - Runtime build command di environment ini timeout tanpa output.
-- Action required:
-  - Jalankan script `scripts/go-live/run-ci-gate.ps1` untuk dispatch + monitor run sampai hijau.
-  - Terapkan branch protection via `scripts/go-live/set-branch-protection.ps1`.
-  - Setelah keduanya sukses, jalankan `scripts/go-live/close-build-checkpoint.ps1`.
-  - Template exact branch protection: `docs/go-live/BRANCH_PROTECTION_TEMPLATE.md`.
-
+  - CI Gate run hijau (Node 20, audit+typecheck+build).
+  - Branch protection active dengan required check Audit + Typecheck + Build.
 ## 3. Auth + role flow validation
 - Status: READY FOR UAT
 - Implemented:
