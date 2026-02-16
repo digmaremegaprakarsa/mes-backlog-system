@@ -14,7 +14,7 @@ if (-not (Test-Path $ReportPath)) {
 }
 
 $report = Get-Content -Raw -Path $ReportPath
-if ($report -notmatch 'FINAL RESULT:\s*PASS') {
+if ($report -notmatch '(?m)^FINAL RESULT:\s*PASS\s*$') {
   throw "Report is not PASS. Update $ReportPath with 'FINAL RESULT: PASS' after QA."
 }
 
