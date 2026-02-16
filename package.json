@@ -1,0 +1,40 @@
+{
+  "name": "mes-backlog-system",
+  "private": true,
+  "engines": {
+    "node": ">=20 <21",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "dev": "next dev ./apps/web",
+    "build": "next build ./apps/web",
+    "start": "next start ./apps/web",
+    "lint": "next lint ./apps/web",
+    "audit:prod": "npm audit --omit=dev",
+    "typecheck": "tsc -p apps/web/tsconfig.json --noEmit",
+    "ci:verify": "npm run audit:prod && npm run typecheck && npm run build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "@tanstack/react-query": "^5.0.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^3.6.0",
+    "framer-motion": "^11.18.2",
+    "lucide-react": "^0.400.0",
+    "next": "^15.5.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.6.0",
+    "recharts": "^2.8.0",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.7.2"
+  }
+}
