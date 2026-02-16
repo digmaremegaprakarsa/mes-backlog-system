@@ -1,9 +1,11 @@
-﻿param(
+param(
   [Parameter(Mandatory = $true)] [string]$Owner,
   [Parameter(Mandatory = $true)] [string]$Repo,
   [string]$Branch = 'main',
   [Parameter(Mandatory = $true)] [string]$Token,
-  [string]$RequiredCheck = 'Audit + Typecheck + Build'
+  [string]$RequiredCheck = 'Audit + Typecheck + Build',
+  [ValidateRange(0, 6)] [int]$RequiredApprovals = 1,
+  [ValidateSet(0,1)] [int]$RequireLastPushApproval = 1
 )
 
 $ErrorActionPreference = 'Stop'
@@ -24,8 +26,8 @@ $body = @{
   required_pull_request_reviews = @{
     dismiss_stale_reviews = $true
     require_code_owner_reviews = $false
-    required_approving_review_count = 1
-    require_last_push_approval = $true
+    required_approving_review_count = $RequiredApprovals
+    require_last_push_approval = [bool]$RequireLastPushApproval
   }
   restrictions = $null
   required_linear_history = $true
