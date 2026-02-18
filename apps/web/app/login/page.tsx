@@ -16,24 +16,32 @@ export default function LoginPage() {
     setLoading(true)
     setError("")
 
-    const { data, error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      })
 
-    setLoading(false)
+      if (signInError) {
+        setError(signInError.message)
+        return
+      }
 
-    if (signInError) {
-      setError(signInError.message)
-      return
-    }
+      if (!data.session?.access_token) {
+        setError("Login gagal: session tidak ditemukan.")
+        return
+      }
 
-    if (data.session?.access_token) {
       const maxAge = data.session.expires_in ?? 3600
       document.cookie = `sb-access-token=${data.session.access_token}; Path=/; Max-Age=${maxAge}; SameSite=Lax; Secure`
-    }
 
-    router.push("/dashboard")
+      // Force a full request so middleware reads the fresh cookie.
+      window.location.assign("/dashboard")
+    } catch {
+      setError("Login gagal. Periksa kredensial atau koneksi Supabase.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
