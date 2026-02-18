@@ -1,16 +1,17 @@
-﻿import { useEffect, useState } from "react"
-import { supabase } from "@/lib/supabaseClient"
+import { useMemo } from "react"
+import { useSessionProfile } from "@/hooks/useSessionProfile"
 
 export const useAuth = () => {
-  const [user, setUser] = useState<unknown>(null)
-  const [loading, setLoading] = useState(true)
+  const { data: profile, isLoading, error } = useSessionProfile()
 
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user)
-      setLoading(false)
-    })
-  }, [])
-
-  return { user, loading }
+  return useMemo(
+    () => ({
+      user: profile,
+      role: profile?.role ?? "viewer",
+      workshopId: profile?.workshop_id ?? null,
+      loading: isLoading,
+      error
+    }),
+    [profile, isLoading, error]
+  )
 }

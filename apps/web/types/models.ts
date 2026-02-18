@@ -118,3 +118,22 @@ export type AuditLog = {
   new_data: Record<string, unknown> | null
   created_at: string
 }
+
+export type SessionProfile = {
+  id: string
+  full_name: string | null
+  role: "admin" | "supervisor" | "operator" | "viewer"
+  workshop_id: string | null
+}
+
+export type NotificationItem = {
+  id: string
+  user_id: string
+  workshop_id: string | null
+  title: string
+  message: string
+  kind: string
+  action_url: string | null
+  is_read: boolean
+  created_at: string
+}

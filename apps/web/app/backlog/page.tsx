@@ -19,6 +19,7 @@ import { Pagination } from "@/components/ui/Pagination"
 import { TableShell } from "@/components/tables/TableShell"
 import { StatusBadge } from "@/components/backlog/StatusBadge"
 import { AttachmentPreviewModal } from "@/components/backlog/AttachmentPreviewModal"
+import { RoleGate } from "@/components/ui/RoleGate"
 
 const emptyForm: WorkOrderInput = {
   wo_number: "",
@@ -283,8 +284,16 @@ export default function BacklogPage() {
         </div>
       </Card>
 
-      <Card title={editingId ? "Edit Work Order" : "Create Work Order"}>
-        <form className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" onSubmit={submit}>
+      <RoleGate
+        minimumRole="operator"
+        fallback={
+          <Card title="Create Work Order">
+            <p className="muted text-sm">Akun Anda hanya bisa melihat backlog. Minta role operator/supervisor/admin untuk membuat data.</p>
+          </Card>
+        }
+      >
+        <Card title={editingId ? "Edit Work Order" : "Create Work Order"}>
+          <form className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" onSubmit={submit}>
           <Input
             value={form.wo_number}
             onChange={(event) => setForm((prev) => ({ ...prev, wo_number: event.target.value }))}
@@ -344,8 +353,9 @@ export default function BacklogPage() {
               </Button>
             ) : null}
           </div>
-        </form>
-      </Card>
+          </form>
+        </Card>
+      </RoleGate>
 
       <Card title="Work Order List">
         <TableShell>

@@ -8,6 +8,7 @@ const links = [
   { href: "/backlog", label: "Backlog" },
   { href: "/progress", label: "Progress" },
   { href: "/analytics", label: "Analytics" },
+  { href: "/notifications", label: "Notifications" },
   { href: "/inventory", label: "Inventory" },
   { href: "/scheduling", label: "Scheduling" },
   { href: "/settings", label: "Settings" }

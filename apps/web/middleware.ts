@@ -6,6 +6,7 @@ const protectedPaths = [
   "/backlog",
   "/progress",
   "/analytics",
+  "/notifications",
   "/inventory",
   "/scheduling",
   "/settings"
