@@ -1,4 +1,3 @@
-import { DEFAULT_WORKSHOP_ID } from "@/lib/constants"
 import { supabase } from "@/lib/supabaseClient"
 
 export const resolveWorkshopId = async () => {
@@ -6,7 +5,7 @@ export const resolveWorkshopId = async () => {
   if (authError) throw authError
 
   const userId = authData.user?.id
-  if (!userId) return DEFAULT_WORKSHOP_ID
+  if (!userId) throw new Error("User not authenticated")
 
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
@@ -16,5 +15,9 @@ export const resolveWorkshopId = async () => {
 
   if (profileError) throw profileError
 
-  return profile?.workshop_id ?? DEFAULT_WORKSHOP_ID
+  if (!profile?.workshop_id) {
+    throw new Error("Profile workshop_id belum di-set. Set workshop_id user di tabel profiles terlebih dahulu.")
+  }
+
+  return profile.workshop_id
 }

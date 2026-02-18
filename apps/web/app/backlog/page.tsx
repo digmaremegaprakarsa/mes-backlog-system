@@ -31,6 +31,7 @@ const emptyForm: WorkOrderInput = {
 
 const pageSize = 10
 const attachmentPageSize = 5
+const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
 
 const isPreviewableImage = (name: string, contentType: string | null) => {
   if (contentType?.startsWith("image/")) return true
@@ -83,6 +84,8 @@ export default function BacklogPage() {
     }
   }, [rows, selectedWorkOrderId])
 
+  const isSelectedWorkOrderUuid = Boolean(selectedWorkOrderId && uuidRegex.test(selectedWorkOrderId))
+
   const { data: attachmentList } = useQuery({
     queryKey: ["attachments", selectedWorkOrderId, attachmentPage],
     queryFn: () =>
@@ -91,7 +94,7 @@ export default function BacklogPage() {
         page: attachmentPage,
         pageSize: attachmentPageSize
       }),
-    enabled: Boolean(selectedWorkOrderId),
+    enabled: isSelectedWorkOrderUuid,
     placeholderData: keepPreviousData
   })
 
@@ -419,11 +422,15 @@ export default function BacklogPage() {
               <Button
                 type="button"
                 onClick={() => selectedFile && uploadMutation.mutate()}
-                disabled={!selectedFile || uploadMutation.isPending}
+                disabled={!selectedFile || uploadMutation.isPending || !isSelectedWorkOrderUuid}
               >
                 Upload File
               </Button>
             </div>
+
+            {!isSelectedWorkOrderUuid ? (
+              <p className="muted mt-2 text-sm">Menunggu work order tersimpan sebelum attachment bisa diproses.</p>
+            ) : null}
 
             <div className="mt-3 space-y-2">
               {attachmentRows.length === 0 ? <p className="muted text-sm">No attachment yet.</p> : null}
