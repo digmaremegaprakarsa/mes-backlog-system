@@ -16,7 +16,7 @@ export default function LoginPage() {
     setLoading(true)
     setError("")
 
-    const { error: signInError } = await supabase.auth.signInWithPassword({
+    const { data, error: signInError } = await supabase.auth.signInWithPassword({
       email,
       password
     })
@@ -26,6 +26,11 @@ export default function LoginPage() {
     if (signInError) {
       setError(signInError.message)
       return
+    }
+
+    if (data.session?.access_token) {
+      const maxAge = data.session.expires_in ?? 3600
+      document.cookie = `sb-access-token=${data.session.access_token}; Path=/; Max-Age=${maxAge}; SameSite=Lax; Secure`
     }
 
     router.push("/dashboard")
