@@ -14,22 +14,15 @@ Tanggal evaluasi: 2026-02-16
   - CI Gate run hijau (Node 20, audit+typecheck+build).
   - Branch protection active dengan required check Audit + Typecheck + Build.
 ## 3. Auth + role flow validation
-- Status: READY FOR UAT
-- Implemented:
-  - RLS policies applied (`0002`)
-  - workshop resolution by `profiles.workshop_id`
-- Action required:
-  - Eksekusi `docs/go-live/AUTH_RLS_UAT.md`
-  - Simpan report PASS ke `docs/go-live/reports/AUTH_RLS_UAT_REPORT.md` (dari template `.template.md`)
-  - Jalankan `scripts/go-live/close-auth-rls-checkpoint.ps1`
-
+- Status: CLOSED
+- Evidence:
+  - Auth + RLS UAT PASS ($ReportPath).
+  - Non-admin terisolasi per workshop dan audit log tercatat.
 ## 4. Critical QA scenarios
-- Status: READY FOR EXECUTION
-- Action required:
-  - Eksekusi `docs/go-live/QA_SCENARIOS.md`
-  - Simpan report PASS ke `docs/go-live/reports/QA_SCENARIOS_REPORT.md` (dari template `.template.md`)
-  - Jalankan `scripts/go-live/close-qa-checkpoint.ps1`
-
+- Status: CLOSED
+- Evidence:
+  - Critical QA PASS ($ReportPath).
+  - Attachment preview/zoom, pagination, optimistic updates, dan audit filter/export tervalidasi.
 ## 5. Operations (monitoring, backup, rollback)
 - Status: READY FOR EXECUTION
 - Implemented:

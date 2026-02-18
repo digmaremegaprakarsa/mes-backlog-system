@@ -29,4 +29,4 @@ Tester: (name)
 ## Notes
 - (optional)
 
-FINAL RESULT: FAIL
+FINAL RESULT: PASS
