@@ -7,7 +7,7 @@ const links = [
   { href: "/dashboard", label: "Home" },
   { href: "/backlog", label: "Backlog" },
   { href: "/progress", label: "Progress" },
-  { href: "/inventory", label: "Stock" },
+  { href: "/notifications", label: "Notify" },
   { href: "/settings", label: "Settings" }
 ]
 

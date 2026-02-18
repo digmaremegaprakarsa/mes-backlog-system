@@ -26,6 +26,7 @@ Starter repo production-ready untuk Backlog Tracker Produksi Bengkel (MES Lite) 
    - `supabase/migrations/0002_full_mes_rls.sql`
    - `supabase/migrations/0003_seed_data.sql`
    - `supabase/migrations/0004_storage_audit_hardening.sql`
+   - `supabase/migrations/0005_fix_profiles_rls_recursion.sql`
 5. `npm run dev`
 
 ## Deploy (Netlify)
@@ -43,6 +44,10 @@ Starter repo production-ready untuk Backlog Tracker Produksi Bengkel (MES Lite) 
 - Trigger `handle_new_user` otomatis membuat profile saat user baru masuk ke `auth.users`.
 - Default workshop id untuk starter CRUD: `11111111-1111-1111-1111-111111111111`.
 - Runtime target: Node 20 (`.nvmrc`, `package.json engines`, `netlify.toml`).
+
+## Enterprise Starter
+
+- Detail versi enterprise starter: `docs/ENTERPRISE_STARTER.md`
 
 ## Go-Live
 
