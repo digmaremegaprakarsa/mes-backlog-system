@@ -4,7 +4,7 @@ const path = require("path")
 const nextConfig = {
   reactStrictMode: true,
   // Ensure server tracing includes the monorepo root when deployed on Netlify.
-  outputFileTracingRoot: path.join(__dirname, "../..")
+  outputFileTracingRoot: path.join(__dirname, "../.."),
 }
 
 module.exports = nextConfig
